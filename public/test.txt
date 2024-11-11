@@ -1,0 +1,17 @@
+<script setup>
+import { usePlayer } from 'https://cdn.jsdelivr.net/npm/@vue-motion/core@latest/dist/index.js'
+import { Motion, Line } from 'https://cdn.jsdelivr.net/npm/@vue-motion/lib@0.6.0/dist/index.js'
+import { onMounted } from 'https://cdn.jsdelivr.net/npm/vue@3.5.12/dist/vue.esm-browser.js'
+
+const { play } = usePlayer()
+
+onMounted(() => {
+  play()
+})
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Line :from="[0, 0]" :to="[100, 300]"/>
+  </Motion>
+</template>
