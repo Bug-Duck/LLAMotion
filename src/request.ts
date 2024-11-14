@@ -41,8 +41,14 @@ Please output in json format, and only json format without any other text.
     messages.push({ role: 'system', content: `
 Now we have the concrete APIs documentation for the widget and animation that you choose:
 
-${JSON.stringify(apiDocuments[jsonData.widget[0]], null, 2)}
-${JSON.stringify(apiDocuments[jsonData.animations[0]], null, 2)}
+${
+  Object.keys(apiDocuments).map(key => {
+    if (jsonData.widget.includes(key) || jsonData.animations.includes(key)) {
+      return `- ${key}: ${apiDocuments[key]}`
+    }
+    return ''
+  }).join('\n')
+}
 
 Now please generate the vue code for the following prompts:
 

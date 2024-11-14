@@ -32,12 +32,19 @@ Now please give me the widget and animation that I want to use, output in the fo
 
 {
   "widget": [
+    "Rect",
+    "Arc",
     // your choice of widget
   ],
   "animations": [
+    "move",
+    "scale",
+    "rotate",
     // your choice of animation
   ],
 }
+
+I want you only choose the name of the widget and animation, not the conncrete parameters.
 
 please output in json format, and only json format without any other text.
 `
