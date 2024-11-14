@@ -5,18 +5,46 @@ import * as vuemotion_core from '@vue-motion/core'
 import * as vuemotion_lib from '@vue-motion/lib'
 
 export function compileVueString(template: string) {
-  // 移除最外层的 <template> 标签，只保留内容
-  template = template.trim().replace(/^<template>([\s\S]*)<\/template>$/, '$1').trim()
+  // 先提取script内容
+  const scriptMatch = template.match(/<script.*?>([\s\S]*?)<\/script>/i)
+  let scriptContent = scriptMatch ? scriptMatch[1].trim() : ''
+  
+  // 清除script中的import语句
+  scriptContent = scriptContent.replace(/^\s*import\s+.*?['"]\s*;?\s*$/gm, '')
+  
+  // 完全移除script标签及其内容
+  template = template.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+  
+  // 提取模板内容
+  template = template.replace(/^<template>([\s\S]*)<\/template>$/, '$1').trim()
+  
+  // 移除style标签及其内容
+  template = template.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
 
   // 验证输入
   if (!template || typeof template !== 'string') {
     throw new Error('Template must be a non-empty string')
   }
 
-  // 清除所有 import 语句
-  template = template.replace(/^\s*import\s+.*?['"]\s*;?\s*$/gm, '')
-
   try {
+    // 编译script内容
+    let setupFunction = () => ({})
+    if (scriptContent) {
+      try {
+        // 将script内容转换为setup函数
+        const scriptCode = `
+          return {
+            setup() {
+              ${scriptContent}
+            }
+          }
+        `
+        setupFunction = new Function(scriptCode)()?.setup
+      } catch (error) {
+        console.error('Failed to compile script:', error)
+      }
+    }
+
     // 编译模板，更新编译选项
     const { code, errors } = compileTemplate({ 
       source: template, 
@@ -42,7 +70,10 @@ export function compileVueString(template: string) {
         // 确保所有 vuemotion 组件都被正确注册
         Rect: vuemotion_lib.Rect
       },
-      setup() {
+      setup(props, context) {
+        // 执行用户的setup函数
+        const userSetup = setupFunction()
+        
         return () => {
           try {
             // 提供 Vue 运行时上下文
@@ -68,9 +99,12 @@ export function compileVueString(template: string) {
                 }
               },
               // 确保所有必要的上下文都可用
-              ...Vue,
+              Vue,
               ...vuemotion_core,
               ...vuemotion_lib,
+              // 将setup返回的数据注入到渲染上下文
+              ...userSetup,
+              usePlayer: vuemotion_core.usePlayer,
             }
             
             // 修改渲染代码的构造方式

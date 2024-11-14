@@ -1,38 +1,63 @@
-# Vue Dynamic Component Compiler
+# LLAMotion SDK
 
-This module provides a utility function to compile a Vue template string into a Vue component. It can be useful for dynamically rendering Vue components from template strings at runtime.
+This is the SDK for LLAMotion, a tool that allows you to generate VueMotion animations from natural language.
 
-## Functions
+## Installation
 
-### `compileVueString(template: string)`
-
-Compiles a Vue template string into a dynamic Vue component.
-
-#### Parameters
-- **template** (`string`): A Vue template string to be compiled. This string should represent the structure of the Vue component.
-
-#### Returns
-- **DynamicComponent** (`Component`): A Vue component instance that can be rendered directly in your application. The component renders based on the template provided.
-
-#### Example
-```javascript
-import { compileVueString } from './path-to-file'
-
-const template = `<div>Hello, {{ name }}!</div>`
-
-const DynamicComponent = compileVueString(template)
-
-// Usage in a Vue app
-app.component('DynamicComponent', DynamicComponent)
+```bash
+npm install llamotion-sdk
 ```
 
-#### Usage Details
+And use the plugin in your Vue app:
 
-1. **Compile Template**: The function uses `@vue/compiler-sfc`'s `compileTemplate` function to compile the provided `template` string into JavaScript code.
-   - The compiled template is wrapped in a `code` property.
+```javascript
+import { createApp } from 'vue'
+import { llamotion } from 'llamotion-sdk'
 
-2. **Define Component**: Using Vue's `defineComponent`, a new component named `DynamicComponent` is created.
-   - Inside the component's `setup` function, a render function is dynamically constructed using the `Function` constructor.
-   - The `h` function (Vue's hyperscript utility) is passed to the render function, allowing it to generate virtual DOM nodes.
+createApp(App).use(llamotion()).mount('#app')
+```
 
-3. **Return Dynamic Component**: The compiled and rendered component can now be used in a Vue application, displaying content based on the `template` string.
+## Usage
+
+Notice: LLAMotion is still in the alpha stage, the API still not be public. This document is for the internal user.
+
+Firstly, you need to create a client:
+
+```javascript
+const client = createLLAMotionClient({
+  apiKey: 'YOUR_OPENAI_API_KEY',
+  model: 'The current fine-tuned model'
+})
+```
+
+And then you can use the client to request the animation:
+
+```javascript
+const animation = await client.requestAsComponent('Please create a simple animation that moves a rectangle and a arc with VueMotion zoom out to 2x, please use animation api scale')
+```
+
+The `animation` is a dynamic component, you can use it directly in your template:
+
+```vue
+<template>
+  <component :is="animation" />
+</template>
+```
+
+The last step is set the style:
+
+```vue
+<style scoped>
+template {
+  display: block;
+}
+</style>
+```
+
+If you want to just compile the Vue component, you can use `compileVueString` function:
+
+```javascript
+const component = compileVueString(code)
+```
+
+The main reason is that you may want to use other language to generate the Vue component.

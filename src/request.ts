@@ -1,5 +1,9 @@
 import { OpenAI } from 'openai'
 import { compileVueString } from './utils/compiler'
+import { getPrompt } from './prompts/choices'
+import { ChatCompletionMessageParam } from 'openai/resources/index.mjs'
+import { apiDocuments } from './prompts/document'
+import { usagePrompt } from './prompts/usage'
 
 export interface LLAMotionClientParams {
   apiKey: string
@@ -14,14 +18,43 @@ export function createLLAMotionClient(params: LLAMotionClientParams) {
 
   async function requestAsCode(prompts: string) {
     console.log('Start to request!')
+    const messages = [
+      ...usagePrompt(),
+      { role: 'system', content: getPrompt() },
+      { role: 'user', content: `
+Now please generate the json data for the following prompts:
+
+\`\`\`txt
+${prompts}
+\`\`\`
+
+Please output in json format, and only json format without any other text.
+      `}
+    ]
+    const firstResponse = await openai.chat.completions.create({
+      model: params.model,
+      messages: messages as ChatCompletionMessageParam[],
+    })
+    messages.push(firstResponse.choices[0].message)
+    const jsonData = JSON.parse(firstResponse.choices[0].message.content.replace('```json', '').replace('```', ''))
+    console.log(jsonData)
+    messages.push({ role: 'system', content: `
+Now we have the concrete APIs documentation for the widget and animation that you choose:
+
+${JSON.stringify(apiDocuments[jsonData.widget[0]], null, 2)}
+${JSON.stringify(apiDocuments[jsonData.animations[0]], null, 2)}
+
+Now please generate the vue code for the following prompts:
+
+\`\`\`txt
+${prompts}
+\`\`\`
+      ` })
     const response = await openai.chat.completions.create({
       model: params.model,
-      messages: [
-        { role: 'system', content: 'You are a helpful assistant that can help me create animations with VueMotion animation engine.' },
-        { role: 'user', content: prompts }
-      ],
+      messages: messages as ChatCompletionMessageParam[],
     })
-    return response.choices[0].message.content
+    return response.choices[0].message.content.replace('```vue', '').replace('```', '')
   }
 
   async function requestAsComponent(prompts: string) {
