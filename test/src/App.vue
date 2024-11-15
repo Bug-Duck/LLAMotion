@@ -9,7 +9,7 @@ const client = createLLAMotionClient({
 
 let animation = ref(null)
 onMounted(async () => {
-  animation.value = await client.requestAsComponent(`Please create a simple animation that moves a rectangle and a arc with VueMotion zoom out to 2x, please use animation api 'scale'`)
+  animation.value = await client.requestAsComponent(`A NumberPlane grows`)
 })
 </script>
 

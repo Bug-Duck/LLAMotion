@@ -11,6 +11,9 @@ importers:
       '@vue-motion/core':
         specifier: ^0.6.0
         version: 0.6.0(typescript@5.6.3)
+      '@vue-motion/extension-math':
+        specifier: ^0.6.0
+        version: 0.6.0(typescript@5.6.3)
       '@vue-motion/lib':
         specifier: ^0.6.0
         version: 0.6.0(typescript@5.6.3)
@@ -329,6 +332,9 @@ packages:
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
+  '@types/katex@0.16.7':
+    resolution: {integrity: sha512-HMwFiRujE5PjrgwHQ25+bsLJgowjGjm5Z8FVSf0N6PwgJrwxH0QxzHYDcKsTfV3wva0vzrpqMTJS2jXPr5BMEQ==}
+
   '@types/node-fetch@2.6.12':
     resolution: {integrity: sha512-8nneRWKCg3rMtF69nLQJnOYUcbafYeFSjqkw3jCRLsqkWFlHaoQrr5mXmofFGOx3DKn7UfmBMyov8ySvLRVldA==}
 
@@ -337,6 +343,9 @@ packages:
 
   '@vue-motion/core@0.6.0':
     resolution: {integrity: sha512-qEPndvV9oUjV7Mfi7XJFz1sTZY1f1TW80Hhv2HVvPxwaaKeIuzlGS8+pn14h0vHPAlYoha0t7CQag0NgjOcK4A==}
+
+  '@vue-motion/extension-math@0.6.0':
+    resolution: {integrity: sha512-Ds/QDFLn4KF1QkdS2Y95wdHIFa9bjfnChJjilCi9N36z4TLbwU32fugFHCJmBaSUEOncMuaXAsLy0XW3gC/wrw==}
 
   '@vue-motion/lib@0.6.0':
     resolution: {integrity: sha512-3C1PonMfrjJv9Jk/FNjpd799lHtSiPIYtF5K7OyQ6CI441K7cFhAeQ3pBCnDPlLYkgF6ZJI5T10u4PuPs/ET9w==}
@@ -438,6 +447,10 @@ packages:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
     engines: {node: '>= 6'}
 
+  commander@8.3.0:
+    resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
+    engines: {node: '>= 12'}
+
   consola@3.2.3:
     resolution: {integrity: sha512-I5qxpzLv+sJhTVEoLYNcTW+bThDCPsit0vLNKShZx6rLtpilNpmmeTPaeqJb9ZE9dV3DGaeby6Vuhrw38WjeyQ==}
     engines: {node: ^14.18.0 || >=16.10.0}
@@ -538,6 +551,10 @@ packages:
   joycon@3.1.1:
     resolution: {integrity: sha512-34wB/Y7MW7bzjKRjUKTa46I2Z7eV62Rkhva+KkopW7Qvv/OSWBqvkSY7vusOPrNuZcUG3tApvdVgNB8POj3SPw==}
     engines: {node: '>=10'}
+
+  katex@0.16.11:
+    resolution: {integrity: sha512-RQrI8rlHY92OLf3rho/Ts8i/XvjgguEjOkO1BEXcU3N8BqPpSzBNwV/G0Ukr+P/l3ivvJUE/Fa/CwbS6HesGNQ==}
+    hasBin: true
 
   lilconfig@3.1.2:
     resolution: {integrity: sha512-eop+wDAvpItUys0FWkHIKeC9ybYrTGbU41U5K7+bttZZeohvnY7M9dZ5kB21GNWiFT2q1OoPTvncPCgSOVO5ow==}
@@ -1001,6 +1018,8 @@ snapshots:
 
   '@types/estree@1.0.6': {}
 
+  '@types/katex@0.16.7': {}
+
   '@types/node-fetch@2.6.12':
     dependencies:
       '@types/node': 18.19.64
@@ -1014,6 +1033,17 @@ snapshots:
     dependencies:
       '@ffmpeg/ffmpeg': 0.11.0
       '@vue-motion/utils': 0.6.0(typescript@5.6.3)
+      vue: 3.5.12(typescript@5.6.3)
+    transitivePeerDependencies:
+      - encoding
+      - typescript
+
+  '@vue-motion/extension-math@0.6.0(typescript@5.6.3)':
+    dependencies:
+      '@types/katex': 0.16.7
+      '@vue-motion/core': 0.6.0(typescript@5.6.3)
+      '@vue-motion/lib': 0.6.0(typescript@5.6.3)
+      katex: 0.16.11
       vue: 3.5.12(typescript@5.6.3)
     transitivePeerDependencies:
       - encoding
@@ -1140,6 +1170,8 @@ snapshots:
 
   commander@4.1.1: {}
 
+  commander@8.3.0: {}
+
   consola@3.2.3: {}
 
   cross-spawn@7.0.5:
@@ -1246,6 +1278,10 @@ snapshots:
       '@pkgjs/parseargs': 0.11.0
 
   joycon@3.1.1: {}
+
+  katex@0.16.11:
+    dependencies:
+      commander: 8.3.0
 
   lilconfig@3.1.2: {}
 

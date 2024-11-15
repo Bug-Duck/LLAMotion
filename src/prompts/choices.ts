@@ -8,11 +8,24 @@ export const index = {
     TextUnit: 'A text unit widget',
     Webview: 'A widget that can display a HTML content',
     Image: 'A image widget',
+    NumberAxis: 'A number axis widget',
+    NumberPlane: 'A number plane widget',
+    PolarPlane: 'A polar plane widget',
+    Tex: 'A tex widget',
   },
   animations: {
-    'move': 'Move the widget from one position to another',
-    'scale': 'Scale the widget up and down',
-    'rotate': 'Rotate the widget around its center',
+    move: 'Move the widget from one position to another',
+    scale: 'Scale the widget up and down',
+    rotate: 'Rotate the widget around its center',
+    fadeIn: 'Fade in the widget',
+    fadeOut: 'Fade out the widget',
+    grow: 'Grow the widget',
+    destroy: 'Destroy the widget',
+    stroke: 'Stroke the widget',
+    moveTo: 'Move the widget to a specific position',
+    scaleTo: 'Scale the widget to a specific size',
+    rotateTo: 'Rotate the widget to a specific angle',
+    fadeTo: 'Fade the widget to a specific opacity',
   }
 }
 
