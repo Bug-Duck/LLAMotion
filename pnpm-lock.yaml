@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@vue-motion/core':
-        specifier: ^0.6.0
-        version: 0.6.0(typescript@5.6.3)
+        specifier: latest
+        version: 0.7.0-beta.4(typescript@5.6.3)
       '@vue-motion/extension-math':
-        specifier: ^0.6.0
-        version: 0.6.0(typescript@5.6.3)
+        specifier: latest
+        version: 0.7.0-beta.1(typescript@5.6.3)
       '@vue-motion/lib':
-        specifier: ^0.6.0
-        version: 0.6.0(typescript@5.6.3)
+        specifier: latest
+        version: 0.7.0-beta.4(typescript@5.6.3)
       '@vue/compiler-sfc':
         specifier: ^3.5.12
         version: 3.5.12
@@ -341,17 +341,26 @@ packages:
   '@types/node@18.19.64':
     resolution: {integrity: sha512-955mDqvO2vFf/oL7V3WiUtiz+BugyX8uVbaT2H8oj3+8dRyH2FLiNdowe7eNqRM7IOIZvzDH76EoAT+gwm6aIQ==}
 
-  '@vue-motion/core@0.6.0':
-    resolution: {integrity: sha512-qEPndvV9oUjV7Mfi7XJFz1sTZY1f1TW80Hhv2HVvPxwaaKeIuzlGS8+pn14h0vHPAlYoha0t7CQag0NgjOcK4A==}
+  '@vue-motion/core@0.7.0-beta.1':
+    resolution: {integrity: sha512-aRpYkFseekduxCZaezX9KJg4nIoadCdpxYVOvGNWT/sjOgRgDjGSKdE+zBXX5ScHWPEH9ehldOgeHFakoR2DFw==}
 
-  '@vue-motion/extension-math@0.6.0':
-    resolution: {integrity: sha512-Ds/QDFLn4KF1QkdS2Y95wdHIFa9bjfnChJjilCi9N36z4TLbwU32fugFHCJmBaSUEOncMuaXAsLy0XW3gC/wrw==}
+  '@vue-motion/core@0.7.0-beta.4':
+    resolution: {integrity: sha512-rkmN22U4WyfKpl9UhC4BXnKSB3Eb6olmSvE3S9JBNH0heo8Ibh71AI22fyXa4cuRFgzkpX6PyjBTvrcSo02iUA==}
 
-  '@vue-motion/lib@0.6.0':
-    resolution: {integrity: sha512-3C1PonMfrjJv9Jk/FNjpd799lHtSiPIYtF5K7OyQ6CI441K7cFhAeQ3pBCnDPlLYkgF6ZJI5T10u4PuPs/ET9w==}
+  '@vue-motion/extension-math@0.7.0-beta.1':
+    resolution: {integrity: sha512-h42FLkQwcnKvShBRew8PNcwoYuL26TbAnzGKNhP1HTW7/tuItFPHGEAJSvsza6trgMECxiAYfDa8SJ9ZnOUlIw==}
 
-  '@vue-motion/utils@0.6.0':
-    resolution: {integrity: sha512-fp6EKLEMqBWtvSVn4wr2BlpSLhV5QkQMo/dr+omjlTF0pqAJ9zvghkM6ZmsRpJN883JFM4jGTrN9CTmwDFWBqg==}
+  '@vue-motion/lib@0.7.0-beta.1':
+    resolution: {integrity: sha512-Uk3580q9Iq8T6HfLMewH0hXXoOnuuEzluwhFvF8AhEgayVrnN4kLocB4OqLRT7HCUn5+2HFKKK8jnoL2OEhOyw==}
+
+  '@vue-motion/lib@0.7.0-beta.4':
+    resolution: {integrity: sha512-IdBO8biAXAcSDJoNYhtmCGno72DoHk8STE261qBbXBL1MSy4Wqz6ZsFOAWs4IS9J96y08X2xvQ0Q6yx8YPBY1A==}
+
+  '@vue-motion/utils@0.7.0-beta.1':
+    resolution: {integrity: sha512-5jC5OKhRHuu5N2BYa5ixI7PYiWzPdGKt5K9EHMyND2hQVPXS7s/Dv2JEzUmRdZ7UxlbpKWXf8UzLrsMfu7TxtA==}
+
+  '@vue-motion/utils@0.7.0-beta.4':
+    resolution: {integrity: sha512-KAxeD8/BLGECIisyGRisCLCr2jFSuXIwbV9/E3+nk0SOWF/oU0QszUjwUVNwLFd8Vehi4PnmjPdfsMWKFUbUEg==}
 
   '@vue/compiler-core@3.5.12':
     resolution: {integrity: sha512-ISyBTRMmMYagUxhcpyEH0hpXRd/KqDU4ymofPgl2XAkY9ZhQ+h0ovEZJIiPop13UmR/54oA2cgMDjgroRelaEw==}
@@ -1029,35 +1038,62 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@vue-motion/core@0.6.0(typescript@5.6.3)':
+  '@vue-motion/core@0.7.0-beta.1(typescript@5.6.3)':
     dependencies:
       '@ffmpeg/ffmpeg': 0.11.0
-      '@vue-motion/utils': 0.6.0(typescript@5.6.3)
+      '@vue-motion/utils': 0.7.0-beta.1(typescript@5.6.3)
       vue: 3.5.12(typescript@5.6.3)
     transitivePeerDependencies:
       - encoding
       - typescript
 
-  '@vue-motion/extension-math@0.6.0(typescript@5.6.3)':
+  '@vue-motion/core@0.7.0-beta.4(typescript@5.6.3)':
+    dependencies:
+      '@ffmpeg/ffmpeg': 0.11.0
+      '@vue-motion/utils': 0.7.0-beta.4(typescript@5.6.3)
+      vue: 3.5.12(typescript@5.6.3)
+    transitivePeerDependencies:
+      - encoding
+      - typescript
+
+  '@vue-motion/extension-math@0.7.0-beta.1(typescript@5.6.3)':
     dependencies:
       '@types/katex': 0.16.7
-      '@vue-motion/core': 0.6.0(typescript@5.6.3)
-      '@vue-motion/lib': 0.6.0(typescript@5.6.3)
+      '@vue-motion/core': 0.7.0-beta.1(typescript@5.6.3)
+      '@vue-motion/lib': 0.7.0-beta.1(typescript@5.6.3)
       katex: 0.16.11
       vue: 3.5.12(typescript@5.6.3)
     transitivePeerDependencies:
       - encoding
       - typescript
 
-  '@vue-motion/lib@0.6.0(typescript@5.6.3)':
+  '@vue-motion/lib@0.7.0-beta.1(typescript@5.6.3)':
     dependencies:
-      '@vue-motion/core': 0.6.0(typescript@5.6.3)
+      '@vue-motion/core': 0.7.0-beta.1(typescript@5.6.3)
+      '@vue-motion/utils': 0.7.0-beta.1(typescript@5.6.3)
       vue: 3.5.12(typescript@5.6.3)
     transitivePeerDependencies:
       - encoding
       - typescript
 
-  '@vue-motion/utils@0.6.0(typescript@5.6.3)':
+  '@vue-motion/lib@0.7.0-beta.4(typescript@5.6.3)':
+    dependencies:
+      '@vue-motion/core': 0.7.0-beta.4(typescript@5.6.3)
+      '@vue-motion/utils': 0.7.0-beta.4(typescript@5.6.3)
+      vue: 3.5.12(typescript@5.6.3)
+    transitivePeerDependencies:
+      - encoding
+      - typescript
+
+  '@vue-motion/utils@0.7.0-beta.1(typescript@5.6.3)':
+    dependencies:
+      '@ffmpeg/ffmpeg': 0.12.10
+      '@ffmpeg/util': 0.12.1
+      vue: 3.5.12(typescript@5.6.3)
+    transitivePeerDependencies:
+      - typescript
+
+  '@vue-motion/utils@0.7.0-beta.4(typescript@5.6.3)':
     dependencies:
       '@ffmpeg/ffmpeg': 0.12.10
       '@ffmpeg/util': 0.12.1

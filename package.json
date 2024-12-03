@@ -18,9 +18,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vue-motion/core": "^0.6.0",
-    "@vue-motion/extension-math": "^0.6.0",
-    "@vue-motion/lib": "^0.6.0",
+    "@vue-motion/core": "latest",
+    "@vue-motion/extension-math": "latest",
+    "@vue-motion/lib": "latest",
     "@vue/compiler-sfc": "^3.5.12",
     "openai": "^4.71.1",
     "vue": "^3.5.12"
