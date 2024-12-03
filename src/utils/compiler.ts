@@ -3,6 +3,7 @@ import { h, defineComponent, openBlock, createElementBlock, createElementVNode, 
 import * as Vue from 'vue'
 import * as vuemotion_core from '@vue-motion/core'
 import * as vuemotion_lib from '@vue-motion/lib'
+import * as vuemotion_extension_math from '@vue-motion/extension-math'
 
 export function compileVueString(template: string) {
   // 先提取script内容
@@ -94,6 +95,9 @@ export function compileVueString(template: string) {
                   if (name in vuemotion_core) {
                     return vuemotion_core[name];
                   }
+                  if (name in vuemotion_extension_math) {
+                    return vuemotion_extension_math[name];
+                  }
                   console.warn(`Component ${name} not found`);
                   return name; // 返回组件名称而不是undefined
                 }
@@ -102,6 +106,7 @@ export function compileVueString(template: string) {
               Vue,
               ...vuemotion_core,
               ...vuemotion_lib,
+              ...vuemotion_extension_math,
               // 将setup返回的数据注入到渲染上下文
               ...userSetup,
               usePlayer: vuemotion_core.usePlayer,

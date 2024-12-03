@@ -4,12 +4,12 @@ import { createLLAMotionClient } from '../../dist/index.js'
 
 const client = createLLAMotionClient({
   apiKey: '',
-  model: 'ft:gpt-4o-mini-2024-07-18:personal::AT9I9SDW'
+  model: 'ft:gpt-4o-mini-2024-07-18:personal::ATfzhAcy'
 })
 
 let animation = ref(null)
 onMounted(async () => {
-  animation.value = await client.requestAsComponent(`A NumberPlane grows`)
+  animation.value = await client.requestAsComponent(`A function graph with f(x) = sin(x)`)
 })
 </script>
 

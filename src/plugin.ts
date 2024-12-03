@@ -29,6 +29,11 @@ export function llamotion() {
           app.component(i, (vuemotion_lib as any)[i]);
         }
       }
+      for (const i in vuemotion_extension_math) {
+        if ((vuemotion_extension_math as any)[i].setup) {
+          app.component(i, (vuemotion_extension_math as any)[i]);
+        }
+      }
     }
   }
 }

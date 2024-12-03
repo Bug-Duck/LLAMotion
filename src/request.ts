@@ -39,7 +39,7 @@ Please output in json format, and only json format without any other text.
     const jsonData = JSON.parse(firstResponse.choices[0].message.content.replace('```json', '').replace('```', ''))
     console.log(jsonData)
     messages.push({ role: 'system', content: `
-Now we have the concrete APIs documentation for the widget and animation that you choose:
+Now we have the concrete APIs documentation for the widget and animation that you choose, If it has not default value, it is required:
 
 ${
   Object.keys(apiDocuments).map(key => {
@@ -56,6 +56,7 @@ Now please generate the vue code for the following prompts:
 ${prompts}
 \`\`\`
       ` })
+    console.log(messages)
     const response = await openai.chat.completions.create({
       model: params.model,
       messages: messages as ChatCompletionMessageParam[],

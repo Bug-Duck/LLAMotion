@@ -11,7 +11,11 @@ export const index = {
     NumberAxis: 'A number axis widget',
     NumberPlane: 'A number plane widget',
     PolarPlane: 'A polar plane widget',
+    MathFunction: 'A math function widget',
     Tex: 'A tex widget',
+    Video: 'A video widget',
+    Circle: 'A full circle widget',
+    Ellipse: 'An ellipse widget',
   },
   animations: {
     move: 'Move the widget from one position to another',
@@ -21,7 +25,7 @@ export const index = {
     fadeOut: 'Fade out the widget',
     grow: 'Grow the widget',
     destroy: 'Destroy the widget',
-    stroke: 'Stroke the widget',
+    trace: 'Stroke the widget',
     moveTo: 'Move the widget to a specific position',
     scaleTo: 'Scale the widget to a specific size',
     rotateTo: 'Rotate the widget to a specific angle',
@@ -30,10 +34,13 @@ export const index = {
 }
 
 export function getPrompt() {
-  return `
-You are a helpful assistant that can help me create animations with VueMotion animation engine.
+  return `You must respond with ONLY a valid JSON object in this EXACT format, with no other text:
+{
+  "widget": ["WidgetName"],
+  "animations": ["AnimationName"]
+}
 
-I want to you to choose a widget and an animation from the following choices:
+Choose one widget and one animation from these options:
 
 Widgets:
 ${Object.entries(index.widgets).map(([key, value]) => `- ${key}: ${value}`).join('\n')}
@@ -41,24 +48,13 @@ ${Object.entries(index.widgets).map(([key, value]) => `- ${key}: ${value}`).join
 Animations:
 ${Object.entries(index.animations).map(([key, value]) => `- ${key}: ${value}`).join('\n')}
 
-Now please give me the widget and animation that I want to use, output in the following json format:
-
+DO NOT include any explanations, words, or other text. ONLY output the JSON object.
+WRONG: "Here's a JSON with my choices..."
+WRONG: "I choose..."
+CORRECT:
 {
-  "widget": [
-    "Rect",
-    "Arc",
-    // your choice of widget
-  ],
-  "animations": [
-    "move",
-    "scale",
-    "rotate",
-    // your choice of animation
-  ],
+  "widget": ["Rect"],
+  "animations": ["fadeIn"]
 }
-
-I want you only choose the name of the widget and animation, not the conncrete parameters.
-
-please output in json format, and only json format without any other text.
 `
 }
