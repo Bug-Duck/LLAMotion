@@ -20,8 +20,7 @@ export function createLLAMotionClient(params: LLAMotionClientParams) {
     console.log('Start to request!')
     const messages = [
       ...usagePrompt(),
-      { role: 'system', content: getPrompt() },
-      { role: 'user', content: `
+      { role: 'user', content: getPrompt() + '\n' + `
 Now please generate the json data for the following prompts:
 
 \`\`\`txt
