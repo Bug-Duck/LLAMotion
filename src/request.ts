@@ -1,5 +1,5 @@
 import { OpenAI } from 'openai'
-import { compileVueString } from './utils/compiler'
+import { compile, precompile } from './utils/compiler'
 import { getPrompt } from './prompts/choices'
 import { ChatCompletionMessageParam } from 'openai/resources/index.mjs'
 import { apiDocuments } from './prompts/document'
@@ -66,7 +66,7 @@ ${prompts}
   async function requestAsComponent(prompts: string) {
     const code = await requestAsCode(prompts)
     console.log(code)
-    return compileVueString(code)
+    return compile(precompile(code))
   }
 
   return {

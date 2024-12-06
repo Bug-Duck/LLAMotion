@@ -1,6 +1,6 @@
 {
   "name": "llamotion-sdk",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -23,7 +23,8 @@
     "@vue-motion/lib": "latest",
     "@vue/compiler-sfc": "^3.5.12",
     "openai": "^4.71.1",
-    "vue": "^3.5.12"
+    "vue": "^3.5.12",
+    "vue-inbrowser-compiler": "^4.72.4"
   },
   "devDependencies": {
     "tsup": "^8.3.5",

@@ -1,24 +1,27 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { createLLAMotionClient } from '../../dist/index.js'
+import { defineComponent } from 'vue';
+import { compile } from 'vue-inbrowser-compiler';
 
-const client = createLLAMotionClient({
-  apiKey: '',
-  model: 'ft:gpt-4o-mini-2024-07-18:personal::ATfzhAcy'
+const result = compile(
+    `<script setup>
+
+const x = ref(0)
+onMounted(() => {
+  x.value = 1
 })
 
-let animation = ref(null)
-onMounted(async () => {
-  animation.value = await client.requestAsComponent(`A function graph with f(x) = sin(x)`)
-})
+<\/script>
+
+<template>
+  <div>{{ x }}</div>
+</template>
+`)
+console.log(result)
+const component = defineComponent(Function(result.script.replace('const Vue = require("vue");', ''))())
+console.log(component)
 </script>
 
 <template>
-  <component :is="animation" v-if="true"/>
+  <component :is="component" />
 </template>
 
-<style scoped>
-template {
-  display: block;
-}
-</style>
