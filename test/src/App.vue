@@ -3,6 +3,7 @@ import { compile, precompile } from '../../src/utils/compiler'
 
 const component = compile(precompile(`
 <script setup>
+import { hello } from 'hello'
 
 const x = ref(0)
 onMounted(() => {
