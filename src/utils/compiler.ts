@@ -2,7 +2,9 @@ import { defineComponent } from 'vue'
 import { compile as clp } from 'vue-inbrowser-compiler'
 
 export function precompile(code: string): object {
-  const compiledObject = clp(code)
+  // Remove all import statements before compilation
+  const codeWithoutImports = code.replace(/import\s+.*?['"]\s*;?\s*\n?/g, '')
+  const compiledObject = clp(codeWithoutImports)
   compiledObject.script.replace(
     'const Vue = require(\'vue\');',
     ''
