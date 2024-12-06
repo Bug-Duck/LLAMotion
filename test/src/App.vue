@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { defineComponent } from 'vue';
-import { compile } from 'vue-inbrowser-compiler';
+import { compile, precompile } from '../../src/utils/compiler'
 
-const result = compile(
-    `<script setup>
+const component = compile(precompile(`
+<script setup>
 
 const x = ref(0)
 onMounted(() => {
@@ -15,10 +14,7 @@ onMounted(() => {
 <template>
   <div>{{ x }}</div>
 </template>
-`)
-console.log(result)
-const component = defineComponent(Function(result.script.replace('const Vue = require("vue");', ''))())
-console.log(component)
+`))
 </script>
 
 <template>
