@@ -22,6 +22,7 @@ export function precompile(code: string): string {
     'https://cdn.jsdelivr.net/npm/@vue-motion/core@latest/dist/index.js': vuemotion_core,
     'https://cdn.jsdelivr.net/npm/@vue-motion/lib@latest/dist/index.js': vuemotion_lib,
     'https://cdn.jsdelivr.net/npm/@vue-motion/extension-math@latest/dist/index.js': vuemotion_extension_math,
+    'https://cdn.jsdelivr.net/npm/vue@3.5.12/dist/vue.esm-browser.js': vue,
     'vue': vue,
   };
 
