@@ -31,6 +31,15 @@ The type is in parentheses, and the default value is in square brackets.
 - \`to\`: The end angle. (\`number\` ranges [0, 360]) [360]
 `,
 
+  discolorateBorderTo: `This is a animation api. The animation is used to change the border color of the widget.
+
+The type is in parentheses, and the default value is in square brackets.
+
+- \`duration\`: The duration of the animation. (\`number\`)
+- \`by\`: The timing function. (\`(t: number) => number\`) [t => t]
+- \`to\`: The last value of the color, it can be RGB, RGBA, HSL, HSLA, and CSS color string. (\`string\`)
+`,
+
   NumberAxis: `This is a widget api.
 
 The type is in parentheses, and the default value is in square brackets.
@@ -123,7 +132,13 @@ The type is in parentheses, and the default value is in square brackets.
 - \`division-y\`: Calculate the Y-axis step size. (\`number\`) [100]
 - \`color\`: Control the color of the graphics. (\`string\`) ['white']
 - \`width\`: Control the line width of the graph. (\`number\`) 
-- \`fill-color\`: Controls the fill color of the graph. (\`string\`) ["none"]`,
+- \`fill-color\`: Controls the fill color of the graph. (\`string\`) ["none"]
+
+Notice:
+
+- \`fill-color\` is not be suggested to set, because it is a function image.
+- property \`domain\` has a division effect on the graph, the default value of \`division-x\` is 100, which means the concrete length of a unit of \`domain\` is 100. for example if you want to draw a function that's domain is [0, 10], the concrete length will be 10 * 100 = 1000. Don't set the value overloaded otherwise it will render slowly.
+`,
 
   Text: `This is a widget.
 
@@ -242,7 +257,12 @@ The type is in parentheses, and the default value is in square brackets.
 - \`tip-x\`: X axis arrow color. (\`string\`) ["white"]
 - \`tip-y\`: Y axis arrow color. (\`string\`) ["white"]
 - \`base-unit\`: The unit of a coordinate axis. (\`'number' | 'radian' | 'degree'\`)
-- \`y-rotation\`: Control the rotation Angle of Y-axis text. (\`number\` ranges [0, 360]) [90]`,
+- \`y-rotation\`: Control the rotation Angle of Y-axis text. (\`number\` ranges [0, 360]) [90]
+
+Notice:
+
+- property \`domain-x\` and \`domain-y\` has a division effect on the graph, the default value of \`interval-x\` and \`interval-y\` is 100, which means the concrete length of a unit of \`domain\` is 100. for example if you want to draw a function that's domain is [0, 10], the concrete length will be 10 * 100 = 1000. Don't set the value overloaded otherwise it will render slowly.
+`,
 
   move: `This is a animation api.
 
@@ -252,6 +272,15 @@ The type is in parentheses, and the default value is in square brackets.
 - \`by\`: The timing function. (\`(t: number) => number\`) [t => t]
 - \`offsetX\`: The offset on x-coordinate. (\`number\`)
 - \`offsetY\`: The offset on y-coordinate. (\`number\`)
+`,
+
+  discolorateFillTo: `This is a animation api. The animation is used to change the fill color of the widget.
+
+The type is in parentheses, and the default value is in square brackets.
+
+- \`duration\`: The duration of the animation. (\`number\`)
+- \`by\`: The timing function. (\`(t: number) => number\`) [t => t]
+- \`to\`: The last value of the color, it can be RGB, RGBA, HSL, HSLA, and CSS color string. (\`string\`)
 `,
 
   PolarPlane: `This is a widget api.
@@ -321,6 +350,15 @@ The type is in parentheses, and the default value is in square brackets.
 - \`border-interval\`: The dash of border line. (\`[number, number]\`) [[1, 0]]
 - \`radius\`: The radius of the circle. (\`number\`)`,
 
+  discolorateFill: `This is a animation api. The animation is used to change the fill color of the widget.
+
+The type is in parentheses, and the default value is in square brackets.
+
+- \`duration\`: The duration of the animation. (\`number\`)
+- \`by\`: The timing function. (\`(t: number) => number\`) [t => t]
+- \`offset\`: The offset value of the color, it can be RGB, RGBA, HSL, HSLA, and CSS color string. (\`string\`)
+`,
+
   fadeIn: `This is a animation api.
 
 The type is in parentheses, and the default value is in square brackets.
@@ -371,6 +409,15 @@ The type is in parentheses, and the default value is in square brackets.
 - \`to\`: The end opacity. (\`number\`)
 `,
 
+  moveOnFunction: `This is a animation api. The \`moveOnFunction\` animation is used to move the widget on the mathematical function.
+
+The type is in parentheses, and the default value is in square brackets.
+
+- \`duration\`: The duration of the animation. (\`number\`)
+- \`by\`: The timing function. (\`(t: number) => number\`) [t => t]
+- \`path\`: The function. (\`(progress: number) => { x: number, y: number }\`)
+`,
+
   scale: `This is a animation api.
 
 The type is in parentheses, and the default value is in square brackets.
@@ -379,6 +426,23 @@ The type is in parentheses, and the default value is in square brackets.
 - \`by\`: The timing function. (\`(t: number) => number\`) [t => t]
 - \`offsetX\`: The scale value on x-coordinate. (\`number\`)
 - \`offsetY\`: The scale value on y-coordinate. (\`number\`)`,
+
+  discolorateBorder: `This is a animation api. The animation is used to change the border color of the widget.
+
+The type is in parentheses, and the default value is in square brackets.
+
+- \`duration\`: The duration of the animation. (\`number\`)
+- \`by\`: The timing function. (\`(t: number) => number\`) [t => t]
+- \`offset\`: The offset value of the color, it can be RGB, RGBA, HSL, HSLA, and CSS color string. (\`string\`)
+`,
+
+  moveOnPath: `This is a animation api. The \`moveOnPath\` animation is used to move the widget on the SVG path.
+
+The type is in parentheses, and the default value is in square brackets.
+
+- \`duration\`: The duration of the animation. (\`number\`)
+- \`path\`: The SVG path. (\`string\`)
+`,
 
   Ellipse: `This is a widget.
 
