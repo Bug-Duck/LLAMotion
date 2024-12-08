@@ -6,9 +6,9 @@ The basic syntax is like below:
 
 \`\`\`vue
 <script setup>
-import { usePlayer, useWidget } from 'https://cdn.jsdelivr.net/npm/@vue-motion/core@latest/dist/index.js'
-import { Motion, Rect, move } from 'https://cdn.jsdelivr.net/npm/@vue-motion/lib@latest/dist/index.js'
-import { onMounted } from 'https://cdn.jsdelivr.net/npm/vue@3.5.12/dist/vue.esm-browser.js'
+import { usePlayer, useWidget } from '@vue-motion/core'
+import { Motion, Rect, move } from '@vue-motion/lib'
+import { onMounted } from 'vue'
 
 // 1. use the hook to get the two key methods.
 const { play, useAnimation } = usePlayer()

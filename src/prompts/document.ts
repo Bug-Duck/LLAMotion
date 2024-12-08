@@ -11,7 +11,7 @@ The type is in parentheses, and the default value is in square brackets.
 - \`toY\`: The end scale on y-coordinate. (\`number\`)
 `,
 
-  Arc: `This is a widget.
+  Arc: `This is a widget from package \`@vue-motion/lib\`.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -40,7 +40,7 @@ The type is in parentheses, and the default value is in square brackets.
 - \`to\`: The last value of the color, it can be RGB, RGBA, HSL, HSLA, and CSS color string. (\`string\`)
 `,
 
-  NumberAxis: `This is a widget api.
+  NumberAxis: `This is a widget from package \`@vue-motion/extension-math\` api.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -68,7 +68,7 @@ This animation will gradually create the element from 0 to 1.
 - \`duration\`: The duration of the animation. (\`number\`)
 - \`by\`: The timing function. (\`(t: number) => number\`) [t => t]`,
 
-  Image: `This is a widget.
+  Image: `This is a widget from package \`@vue-motion/lib\`.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -92,7 +92,7 @@ This animation will gradually destroy the element.
 - \`by\`: The timing function. (\`(t: number) => number\`) [t => t]
 `,
 
-  Group: `This is a widget.
+  Group: `This is a widget from package \`@vue-motion/lib\`.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -115,7 +115,7 @@ The type is in parentheses, and the default value is in square brackets.
 - \`toY\`: The end y-coordinate. (\`number\`)
 `,
 
-  MathFunction: `This is a widget api.
+  MathFunction: `This is a widget from package \`@vue-motion/extension-math\` api.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -140,7 +140,7 @@ Notice:
 - property \`domain\` has a division effect on the graph, the default value of \`division-x\` is 100, which means the concrete length of a unit of \`domain\` is 100. for example if you want to draw a function that's domain is [0, 10], the concrete length will be 10 * 100 = 1000. Don't set the value overloaded otherwise it will render slowly.
 `,
 
-  Text: `This is a widget.
+  Text: `This is a widget from package \`@vue-motion/lib\`.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -172,7 +172,7 @@ The type is in parentheses, and the default value is in square brackets.
 - \`by\`: The timing function. (\`(t: number) => number\`) [t => t]
 - \`offset\`: The offset angle. (\`number\`)`,
 
-  Line: `This is a widget.
+  Line: `This is a widget from package \`@vue-motion/lib\`.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -200,7 +200,7 @@ The type is in parentheses, and the default value is in square brackets.
 - \`to\`: The end angle. (\`number\`)
 `,
 
-  Polygon: `This is a widget.
+  Polygon: `This is a widget from package \`@vue-motion/lib\`.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -218,7 +218,7 @@ The type is in parentheses, and the default value is in square brackets.
 - \`font_family\`: The font family of the text. (\`string\`) [""]
 - \`points\`: The points composing the polygon. (\`Array<[number, number]>\`)`,
 
-  Webview: `This is a widget.
+  Webview: `This is a widget from package \`@vue-motion/lib\`.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -231,7 +231,7 @@ The type is in parentheses, and the default value is in square brackets.
 - \`width\`: The width of the rectangle. (\`number\`)
 - \`height\`: The height of the rectangle. (\`number\`)`,
 
-  NumberPlane: `This is a widget api.
+  NumberPlane: `This is a widget from package \`@vue-motion/extension-math\` api.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -283,7 +283,7 @@ The type is in parentheses, and the default value is in square brackets.
 - \`to\`: The last value of the color, it can be RGB, RGBA, HSL, HSLA, and CSS color string. (\`string\`)
 `,
 
-  PolarPlane: `This is a widget api.
+  PolarPlane: `This is a widget from package \`@vue-motion/extension-math\` api.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -301,7 +301,7 @@ The type is in parentheses, and the default value is in square brackets.
 - \`font-size\`: Font size. (\`number\`) 
 - \`font-color\`: Font color. (\`string\`) ['white']`,
 
-  Video: `This is a widget.
+  Video: `This is a widget from package \`@vue-motion/lib\`.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -319,7 +319,7 @@ The type is in parentheses, and the default value is in square brackets.
 - \`fps\`: The frame rate of the video. (\`number\`) [60]
 `,
 
-  Tex: `This is a widget api.
+  Tex: `This is a widget from package \`@vue-motion/extension-math\` api.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -333,7 +333,7 @@ The type is in parentheses, and the default value is in square brackets.
 - \`auto-center\`: Whether the formula is automatically centered to render. (\`boolean\`)
 `,
 
-  Circle: `This is a widget.
+  Circle: `This is a widget from package \`@vue-motion/lib\`.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -367,7 +367,7 @@ The type is in parentheses, and the default value is in square brackets.
 - \`by\`: The timing function. (\`(t: number) => number\`) [t => t]
 `,
 
-  TextUnit: `This is a widget.
+  TextUnit: `This is a widget from package \`@vue-motion/lib\`.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -444,7 +444,7 @@ The type is in parentheses, and the default value is in square brackets.
 - \`path\`: The SVG path. (\`string\`)
 `,
 
-  Ellipse: `This is a widget.
+  Ellipse: `This is a widget from package \`@vue-motion/lib\`.
 
 The type is in parentheses, and the default value is in square brackets.
 
@@ -478,7 +478,7 @@ This animation will gradually change the stroke of the element.
 - \`by\`: The timing function. (\`(t: number) => number\`) [t => t]
 `,
 
-  Rect: `This is a widget.
+  Rect: `This is a widget from package \`@vue-motion/lib\`.
 
 The type is in parentheses, and the default value is in square brackets.
 

@@ -1,24 +1,39 @@
 <script setup lang="ts">
-import { compile, precompile } from '../../src/utils/compiler'
+import { usePlayer, useWidget } from '@vue-motion/core'
+import { Motion, NumberPlane, MathFunction } from '@vue-motion/lib'
+import { onMounted } from 'vue'
 
-const component = compile(precompile(`
-<script setup>
-import { hello } from 'hello'
+// 1. use the hook to get the two key methods.
+const { play, useAnimation } = usePlayer()
 
-const x = ref(0)
+// 2. Get the widget with the `useWidget` hook.
+const plane = useWidget()
+const f = useWidget()
+const g = useWidget()
+
 onMounted(() => {
-  x.value = 1
+  // 3. use `useAnimation` to get a animation manager from the get widget instance.
+  useAnimation(f)
+    .animate(fadeIn, { duration: 1 })
+    .exec(() => {
+      console.log('f animation end') // 4. output
+    })
+  useAnimation(g)
+    .animate(fadeIn, { duration: 1 })
+    .exec(() => {
+      console.log('g animation end') // 5. output
+    })
+  // 6. After mounted, call `play` method to begin the animation.
+  play()
 })
-
-<\/script>
-
-<template>
-  <div>{{ x }}</div>
-</template>
-`))
 </script>
 
 <template>
-  <component :is="component" />
+  <!-- 7. Set the animation root of component `<Motion>`, set his width and height -->
+  <Motion :width="1600" :height="900">
+    <!-- 8. Add a basic widget in animation, and bind the widget instance to the `widget` prop -->
+    <NumberPlane :widget="plane" :domainX="[-10, 10]" :domainY="[-10, 10]" />
+    <MathFunction :widget="f" :fn="Math.sin" :domain="[-10, 10]" :plane="plane"/>
+    <MathFunction :widget="g" :fn="Math.cos" :domain="[-10, 10]" :plane="plane"/>
+  </Motion>
 </template>
-
