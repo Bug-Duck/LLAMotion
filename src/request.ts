@@ -4,6 +4,7 @@ import { getPrompt } from './prompts/choices'
 import { ChatCompletionMessageParam } from 'openai/resources/index.mjs'
 import { apiDocuments } from './prompts/document'
 import { usagePrompt } from './prompts/usage'
+import { packagesPrompt } from './prompts/packages'
 
 export interface LLAMotionClientParams {
   apiKey: string
@@ -48,6 +49,8 @@ ${
     return ''
   }).join('\n')
 }
+
+${packagesPrompt()}
 
 Now please generate the vue code for the following prompts:
 
