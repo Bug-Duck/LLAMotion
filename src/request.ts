@@ -1,79 +1,85 @@
-import { OpenAI } from 'openai'
-import { compile, precompile } from './utils/compiler'
-import { getPrompt } from './prompts/choices'
-import { ChatCompletionMessageParam } from 'openai/resources/index.mjs'
-import { apiDocuments } from './prompts/document'
-import { usagePrompt } from './prompts/usage'
-import { packagesPrompt } from './prompts/packages'
+import { precompile, compile as cpl } from "./compiler"
 
-export interface LLAMotionClientParams {
+export const ANONYMIZE = Symbol('ANONYMIZE')
+
+export interface LLMVisionParams {
   apiKey: string
-  model: string
+  apiUrl?: string
+  user: string
 }
 
-export function createLLAMotionClient(params: LLAMotionClientParams) {
-  const openai = new OpenAI({
-    apiKey: params.apiKey,
-    dangerouslyAllowBrowser: true,
-  })
-
-  async function requestAsCode(prompts: string) {
-    console.log('Start to request!')
-    const messages = [
-      ...usagePrompt(),
-      { role: 'user', content: getPrompt() + '\n' + `
-Now please generate the json data for the following prompts:
-
-\`\`\`txt
-${prompts}
-\`\`\`
-
-Please output in json format, and only json format without any other text.
-      `}
-    ]
-    const firstResponse = await openai.chat.completions.create({
-      model: params.model,
-      messages: messages as ChatCompletionMessageParam[],
-    })
-    messages.push(firstResponse.choices[0].message)
-    const jsonData = JSON.parse(firstResponse.choices[0].message.content.replace('```json', '').replace('```', ''))
-    console.log(jsonData)
-    messages.push({ role: 'system', content: `
-Now we have the concrete APIs documentation for the widget and animation that you choose, If it has not default value, it is required:
-
-${
-  Object.keys(apiDocuments).map(key => {
-    if (jsonData.widget.includes(key) || jsonData.animations.includes(key)) {
-      return `- ${key}: ${apiDocuments[key]}`
+export interface LLMVisionResponse {
+  event: string
+  message_id: string
+  conversation_id: string
+  mode: string
+  answer: string
+  metadata: {
+    usage: {
+      prompt_tokens: number
+      prompt_unit_price: string
+      prompt_price_unit: string
+      prompt_price: string
+      completion_tokens: number
+      completion_unit_price: string
+      completion_price_unit: string
+      completion_price: string
+      total_tokens: number
+      total_price: string
+      currency: string
+      latency: number
     }
-    return ''
-  }).join('\n')
+    retriever_resources: Array<{
+      position: number
+      dataset_id: string
+      dataset_name: string
+      document_id: string
+      document_name: string
+      segment_id: string
+      score: number
+      content: string
+    }>
+  }
+  created_at: number
 }
 
-${packagesPrompt()}
+export function createLLMVision(params: LLMVisionParams) {
+  const apiUrl = params.apiUrl || 'https://api.dify.ai/v1/chat-messages'
+  const apiKey = params.apiKey
 
-Now please generate the vue code for the following prompts:
-
-\`\`\`txt
-${prompts}
-\`\`\`
-      ` })
-    console.log(messages)
-    const response = await openai.chat.completions.create({
-      model: params.model,
-      messages: messages as ChatCompletionMessageParam[],
+  async function request(requirement: string) {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        inputs: {},
+        query: requirement,
+        response_mode: 'blocking',
+        user: params.user,
+        files: [],
+      }),
     })
-    return response.choices[0].message.content.replace('```vue', '').replace('```', '')
+
+    const data = await response.json()
+    return data as LLMVisionResponse
   }
 
-  async function requestAsComponent(prompts: string) {
-    const code = await requestAsCode(prompts)
-    console.log(code)
-    return compile(precompile(code))
+  function compile(code: string, additionalModules?: Record<string, any>) {
+    return cpl(precompile(code, additionalModules))
+  }
+
+  async function requestAsComponent(requirement: string, additionalModules?: Record<string, any>) {
+    const response = await request(requirement)
+    const component = compile(response.answer.replace('```vue', '').replace('```', ''), additionalModules)
+    return component
   }
 
   return {
-    requestAsCode,
-    requestAsComponent
+    request,
+    compile,
+    requestAsComponent,
   }
 }

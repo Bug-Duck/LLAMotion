@@ -1,3 +1,3 @@
 export * from './request'
-export * from './utils/compiler'
+export * from './compiler'
 export * from './plugin'
