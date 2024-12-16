@@ -2,13 +2,21 @@ import { precompile, compile as cpl } from "./compiler"
 
 export const ANONYMIZE = Symbol('ANONYMIZE')
 
-export interface LLMVisionParams {
+export interface BijonParams {
   apiKey: string
   apiUrl?: string
-  user: string
 }
 
-export interface LLMVisionResponse {
+export interface BijonConversation {
+  user: string
+  conversationId?: string
+}
+
+export function defineBijonConversation(params: BijonConversation) {
+  return params
+}
+
+export interface BijonResponse {
   event: string
   message_id: string
   conversation_id: string
@@ -43,43 +51,61 @@ export interface LLMVisionResponse {
   created_at: number
 }
 
-export function createLLMVision(params: LLMVisionParams) {
+export function createBijon(params: BijonParams) {
   const apiUrl = params.apiUrl || 'https://api.dify.ai/v1/chat-messages'
   const apiKey = params.apiKey
 
-  async function request(requirement: string) {
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        inputs: {},
-        query: requirement,
-        response_mode: 'blocking',
-        user: params.user,
-        files: [],
-      }),
-    })
+  function createConversation(params: BijonConversation) {
+    const conversation = defineBijonConversation(params)
 
-    const data = await response.json()
-    return data as LLMVisionResponse
-  }
+    async function request(requirement: string) {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          inputs: {},
+          query: requirement,
+          response_mode: 'blocking',
+          user: params.user,
+          files: [],
+          conversation_id: conversation.conversationId ?? void 0,
+        }),
+      })
+  
+      const data = await response.json() as BijonResponse
+      if (data.conversation_id) {
+        conversation.conversationId = data.conversation_id
+      }
+      return data
+    }
 
-  function compile(code: string, additionalModules?: Record<string, any>) {
-    return cpl(precompile(code, additionalModules))
-  }
+    function compile(code: string, additionalModules?: Record<string, any>) {
+      return cpl(precompile(code, additionalModules))
+    }
+  
+    async function requestAsComponent(requirement: string, additionalModules?: Record<string, any>) {
+      const response = await request(requirement)
+      const component = compile(
+        response.answer.match(/```vue.+```/g)?.[0]
+        ? response.answer.replace('```vue', '').replace('```', '').replace(/\/\/.*|\/\*[\s\S]*?\*\/|<!--[\s\S]*?-->/g, '')
+        : response.answer.replace(/\/\/.*|\/\*[\s\S]*?\*\/|<!--[\s\S]*?-->/g, ''), 
+        additionalModules
+      )
+      return component
+    }
 
-  async function requestAsComponent(requirement: string, additionalModules?: Record<string, any>) {
-    const response = await request(requirement)
-    const component = compile(response.answer.replace('```vue', '').replace('```', ''), additionalModules)
-    return component
+    return {
+      request,
+      compile,
+      requestAsComponent,
+      ...conversation,
+    }
   }
 
   return {
-    request,
-    compile,
-    requestAsComponent,
+    createConversation,
   }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "llamotion-sdk",
-  "version": "0.1.12",
+  "name": "bijon",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "type": "module",
