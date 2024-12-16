@@ -1,63 +1,147 @@
-# LLAMotion SDK
+# Bijon
 
-This is the SDK for LLAMotion, a tool that allows you to generate VueMotion animations from natural language.
+Bijon is a Vue component generation tool based on VueMotion that generates mathematical, physical, statistical animations through natural language.
 
 ## Installation
 
 ```bash
-npm install llamotion-sdk
+npm install bijon
+# or
+yarn add bijon
 ```
 
-And use the plugin in your Vue app:
+## Basic Usage
+
+### 1. Create Bijon Instance
 
 ```javascript
-import { createApp } from 'vue'
-import { llamotion } from 'llamotion-sdk'
+import { createBijon } from 'bijon'
 
-createApp(App).use(llamotion()).mount('#app')
-```
-
-## Usage
-
-Notice: LLAMotion is still in the alpha stage, the API still not be public. This document is for the internal user.
-
-Firstly, you need to create a client:
-
-```javascript
-const client = createLLAMotionClient({
-  apiKey: 'YOUR_OPENAI_API_KEY',
-  model: 'The current fine-tuned model'
+const bijon = createBijon({
+  apiKey: 'YOUR_DIFY_API_KEY',  // Dify API Key
+  apiUrl: 'YOUR_API_URL'        // Optional, defaults to https://api.dify.ai/v1/chat-messages
 })
 ```
 
-And then you can use the client to request the animation:
+### 2. Create Conversation
 
 ```javascript
-const animation = await client.requestAsComponent('Please create a simple animation that moves a rectangle and a arc with VueMotion zoom out to 2x, please use animation api scale')
+const conversation = bijon.createConversation({
+  user: 'user_id',              // User identifier
+  conversationId: 'xxx'         // Optional, for continuing previous conversations
+})
 ```
 
-The `animation` is a dynamic component, you can use it directly in your template:
+### 3. Generate Components
+
+```javascript
+// Method 1: Get component directly
+const component = await conversation.requestAsComponent('Create a counter component')
+
+// Method 2: Get response and compile manually
+const response = await conversation.request('Create a counter component')
+const component = conversation.compile(response.answer)
+```
+
+## Using in Vue Applications
+
+### 1. Register Plugin
+
+```javascript
+import { createApp } from 'vue'
+import { bijon } from 'bijon'
+import App from './App.vue'
+
+const app = createApp(App)
+app.use(bijon())
+```
+
+### 2. Use in Components
 
 ```vue
 <template>
-  <component :is="animation" />
+  <div>
+    <component :is="generatedComponent" />
+  </div>
 </template>
-```
 
-The last step is set the style:
+<script setup>
+import { ref } from 'vue'
+import { createBijon } from 'bijon'
 
-```vue
-<style scoped>
-template {
-  display: block;
+const generatedComponent = ref(null)
+const bijon = createBijon({
+  apiKey: 'YOUR_DIFY_API_KEY'
+})
+
+const conversation = bijon.createConversation({
+  user: 'user_id'
+})
+
+// Generate component
+const init = async () => {
+  generatedComponent.value = await conversation.requestAsComponent('Create a counter component')
 }
-</style>
+
+init()
+</script>
 ```
 
-If you want to just compile the Vue component, you can use `compileVueString` function:
+## API Reference
 
-```javascript
-const component = compileVueString(code)
-```
+### createBijon(params)
 
-The main reason is that you may want to use other language to generate the Vue component.
+Creates a Bijon instance.
+
+Parameters:
+- `params.apiKey`: Dify API key (required)
+- `params.apiUrl`: API URL (optional)
+
+### createConversation(params)
+
+Creates a conversation instance.
+
+Parameters:
+- `params.user`: User identifier (required)
+- `params.conversationId`: Conversation ID (optional)
+
+### conversation.request(requirement)
+
+Sends a request and gets the raw response.
+
+Parameters:
+- `requirement`: Component requirement description
+
+Returns: Promise<BijonResponse>
+
+### conversation.requestAsComponent(requirement, additionalModules?)
+
+Requests and compiles directly to a Vue component.
+
+Parameters:
+- `requirement`: Component requirement description
+- `additionalModules`: Additional module mappings (optional)
+
+Returns: Promise<Component>
+
+### conversation.compile(code, additionalModules?)
+
+Compiles Vue component code.
+
+Parameters:
+- `code`: Component code
+- `additionalModules`: Additional module mappings (optional)
+
+Returns: Component
+
+## Built-in Modules
+
+Bijon comes with the following modules pre-integrated:
+- `@vue-motion/core`
+- `@vue-motion/lib`
+- `@vue-motion/extension-math`
+- `vue`
+
+## License
+
+MIT
