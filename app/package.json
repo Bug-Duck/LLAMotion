@@ -12,6 +12,7 @@
     "@vue-motion/core": "latest",
     "@vue-motion/lib": "latest",
     "@vue/compiler-dom": "^3.5.13",
+    "bijon": "^0.1.0",
     "vue": "3.2.25",
     "vue-inbrowser-compiler": "^4.72.4"
   },

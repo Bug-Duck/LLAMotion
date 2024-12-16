@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick, markRaw } from 'vue'
-import { createBijon } from '../../src/index'
+import { createBijon } from 'bijon'
 import { usePlayer } from '@vue-motion/core'
 
 const prompt = ref('')
